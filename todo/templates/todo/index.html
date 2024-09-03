@@ -1,0 +1,43 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8">
+
+        {% for i in list %}
+        <div class="card">
+            <center><b>{{i.title}}</b></center>
+            <hr />
+            {{i.date}}
+            <hr />
+            {{i.details}}
+            <br />
+            {% if i.image %}
+            <img src="{{ i.image.url}}" alt="connect" style="max-height:300px">
+            {% endif %}
+            <br />
+            <form action="/del/{{i.id}}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+                {% csrf_token %}
+                <button value="remove" type="submit" class="btn btn-primary" style="float: right;"><span
+                        class="glyphicon glyphicon-trash"></span> &nbsp; remove</button>
+            </form>
+            <a href="/details/{{i.id}}">View Details</a>
+        </div>
+        {% endfor%}
+    </div>
+    <div class="col-md-1"> </div>
+    <div class="col-md-3">
+        <div class="submit_form">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{forms.as_p}}
+                <center>
+                    <input type="submit" class="btn btn-default" value="submit" />
+                </center>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

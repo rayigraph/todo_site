@@ -1,0 +1,25 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="card">
+            <h1>{{item.title}}</h1>
+            <hr />
+            {{item.date}}
+            <hr />
+            {{item.details}}
+            <br />
+            <br />
+            <form action="/del/{{item.id}}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+                {% csrf_token %}
+                <button value="remove" type="submit" class="btn btn-primary" style="float: right;"><span
+                        class="glyphicon glyphicon-trash"></span> &nbsp; remove</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
